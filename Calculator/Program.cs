@@ -32,8 +32,6 @@ class Program
                 Console.WriteLine("\ts - Subtract");
                 Console.WriteLine("\tm - Multiply");
                 Console.WriteLine("\td - Divide");
-                Console.WriteLine("\tsr - Square Root");
-                Console.WriteLine("\tp - Take the Power of");
                 Console.Write("Your option? ");
 
                 op = Console.ReadLine();

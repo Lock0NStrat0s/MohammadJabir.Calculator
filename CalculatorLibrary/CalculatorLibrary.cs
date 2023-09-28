@@ -54,6 +54,7 @@ namespace CalculatorLibrary
                     break;
                 // Return text for an incorrect option entry.
                 default:
+                    writer.WriteValue("Incorrect Operation.");
                     break;
             }
 
