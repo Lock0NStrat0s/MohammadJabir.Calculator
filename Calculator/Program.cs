@@ -1,5 +1,6 @@
 ﻿using CalculatorLibrary;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 class Program
 {
@@ -11,6 +12,8 @@ class Program
         Console.WriteLine("------------------------\n");
 
         Calculator calculator = new Calculator();
+        bool useOldCalcs = false;
+        List<double> oldCalculations = new List<double>();
 
         while (!endApp)
         {
@@ -19,15 +22,30 @@ class Program
             string numInput2 = "";
             double result = 0;
 
-            // Ask the user to type the first number.
-            Console.Write("Type a number, and then press Enter: ");
-            numInput1 = Console.ReadLine();
-
-            double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1))
+            if (oldCalculations.Count > 0)
             {
-                Console.Write("This is not valid input. Please enter an integer value: ");
+                Console.Write("Would you like to use the old results (y/n): ");
+
+                useOldCalcs = Console.ReadLine() switch
+                {
+                    "y" => true,
+                    _ => false
+                };
+            }
+
+            if (!useOldCalcs)
+            {
+
+                // Ask the user to type the first number.
+                Console.Write("Type a number, and then press Enter: ");
                 numInput1 = Console.ReadLine();
+
+                double cleanNum1 = 0;
+                while (!double.TryParse(numInput1, out cleanNum1))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    numInput1 = Console.ReadLine();
+                }
             }
 
             // Ask the user to type the second number.
@@ -58,7 +76,11 @@ class Program
                 {
                     Console.WriteLine("This operation will result in a mathematical error.\n");
                 }
-                else Console.WriteLine("Your result: {0:0.##}\n", result);
+                else
+                {
+                    Console.WriteLine("Your result: {0:0.##}\n", result);
+                    oldCalculations.Add(result);
+                }
             }
             catch (Exception e)
             {

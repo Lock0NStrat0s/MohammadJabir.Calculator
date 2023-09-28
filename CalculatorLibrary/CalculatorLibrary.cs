@@ -7,6 +7,8 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
+        int totalUsage = 0;
+
         public Calculator()
         {
             StreamWriter logfile = File.CreateText("calculator.json");
@@ -54,6 +56,9 @@ namespace CalculatorLibrary
                 default:
                     break;
             }
+
+            totalUsage++;
+
             writer.WritePropertyName("Result");
             writer.WriteValue(result);
             writer.WriteEndObject();
@@ -64,6 +69,8 @@ namespace CalculatorLibrary
         public void Finish()
         {
             writer.WriteEndArray();
+            writer.WritePropertyName("Total Usage");
+            writer.WriteValue(totalUsage);
             writer.WriteEndObject();
             writer.Close();
         }
