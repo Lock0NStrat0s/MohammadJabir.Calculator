@@ -22,25 +22,26 @@ class Program
             string numInput2 = "";
             double result = 0;
 
+            double cleanNum1 = 0;
+
             if (oldCalculations.Count > 0)
             {
                 Console.Write("Would you like to use the old results (y/n): ");
 
-                useOldCalcs = Console.ReadLine() switch
+                cleanNum1 = Console.ReadLine() switch
                 {
-                    "y" => true,
-                    _ => false
+                    "y" => SelectOldCalc(oldCalculations),
+                    _ => 0
                 };
             }
 
-            if (!useOldCalcs)
+            if (cleanNum1 == 0)
             {
 
                 // Ask the user to type the first number.
                 Console.Write("Type a number, and then press Enter: ");
                 numInput1 = Console.ReadLine();
 
-                double cleanNum1 = 0;
                 while (!double.TryParse(numInput1, out cleanNum1))
                 {
                     Console.Write("This is not valid input. Please enter an integer value: ");
@@ -100,5 +101,26 @@ class Program
         calculator.Finish();
 
         return;
+    }
+
+    private static double SelectOldCalc(List<double> oldCalcs)
+    {
+        string input = "";
+        int result = 0;
+
+        for (int i = 0; i < oldCalcs.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}: {oldCalcs[i]}");
+        }
+
+        while (result <= 0 || result > oldCalcs.Count)
+        {
+            Console.Write("Select from the following results: ");
+            int.TryParse(Console.ReadLine(), out result);
+        }
+
+        Console.WriteLine($"First number: {oldCalcs[result - 1]}");
+
+        return oldCalcs[result - 1];
     }
 }
