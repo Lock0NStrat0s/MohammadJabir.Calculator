@@ -21,6 +21,30 @@ class Program
             string numInput1 = "";
             string numInput2 = "";
             double result = 0;
+            string op = "";
+
+            // Ask the user to choose an operator.
+            do
+            {
+                Console.WriteLine("Choose an operator from the following list:");
+                if (oldCalculations.Count > 0) { Console.WriteLine("\tdel - Delete Existing List of Results"); }
+                Console.WriteLine("\ta - Add");
+                Console.WriteLine("\ts - Subtract");
+                Console.WriteLine("\tm - Multiply");
+                Console.WriteLine("\td - Divide");
+                Console.WriteLine("\tsr - Square Root");
+                Console.WriteLine("\tp - Take the Power of");
+                Console.Write("Your option? ");
+
+                op = Console.ReadLine();
+
+                if (op == "del")
+                {
+                    oldCalculations.Clear();
+                    Console.WriteLine("The List of Existing Results has been cleared.");
+                }
+            } while (op == "del");
+
 
             double cleanNum1 = 0;
 
@@ -59,16 +83,6 @@ class Program
                 Console.Write("This is not valid input. Please enter an integer value: ");
                 numInput2 = Console.ReadLine();
             }
-
-            // Ask the user to choose an operator.
-            Console.WriteLine("Choose an operator from the following list:");
-            Console.WriteLine("\ta - Add");
-            Console.WriteLine("\ts - Subtract");
-            Console.WriteLine("\tm - Multiply");
-            Console.WriteLine("\td - Divide");
-            Console.Write("Your option? ");
-
-            string op = Console.ReadLine();
 
             try
             {
