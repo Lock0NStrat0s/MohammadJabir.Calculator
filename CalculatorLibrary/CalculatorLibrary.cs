@@ -7,7 +7,7 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
-        int totalUsage = 0;
+        int totalUsage = 0; //challenge
 
         public Calculator()
         {
